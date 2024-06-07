@@ -1,0 +1,19 @@
+{
+  version: 1,
+  mediaFileName: 'scroll_2.mov',
+  cutSegments: [
+    {
+      end: 1.0245364295857988,
+      name: '',
+    },
+    {
+      start: 1.0245364295857988,
+      end: 4.037080633136095,
+      name: '',
+    },
+    {
+      start: 4.037080633136095,
+      name: '',
+    },
+  ],
+}
