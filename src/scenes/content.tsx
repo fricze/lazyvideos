@@ -1,10 +1,7 @@
 import {
   makeScene2D,
-  Circle,
   Node,
   Rect,
-  Layout,
-  Txt,
   Code,
   replace,
   insert,
@@ -15,11 +12,8 @@ import {
 import {
   DEFAULT,
   waitFor,
-  createSignal,
   all,
-  SmoothSpring,
   createRef,
-  spring,
   waitUntil,
 } from "@motion-canvas/core";
 
@@ -35,16 +29,6 @@ export default makeScene2D(function* (view) {
 
   const videoNode = createRef<Node>();
 
-  const endingTextRef = createRef<Layout>();
-  const introRef = createRef<Layout>();
-
-  const frame = createSignal(0);
-  const introFrame = createSignal(0);
-  const frameCaret = createSignal(0);
-
-  const color = "#ddd";
-  const fontSize = 114;
-
   const video2Node = (
     <Video ref={videoRef2} src={scrollVideoViolet} opacity={0.2} radius={5} />
   );
@@ -52,98 +36,26 @@ export default makeScene2D(function* (view) {
     <Video ref={videoRef3} src={scrollVideoBW} opacity={0.2} radius={5} />
   );
 
-  view
-    .fill("#242424")
-    .add(
-      <Rect
-        // fill={"blue"}
-        direction={"row"}
-        width={1185}
-        height={896}
-        gap={0}
-        layout
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Node>
-          <Code
-            ref={code}
-            // fontSize={fontSize / 1.62 / 1.62 / 1.62}
-            fontSize={30}
-            minWidth={660}
-            maxWidth={660}
-          />
-        </Node>
+  view.fill("#242424").add(
+    <Rect
+      direction={"row"}
+      width={1185}
+      height={896}
+      gap={0}
+      layout
+      alignItems={"center"}
+      justifyContent={"space-between"}
+    >
+      <Node>
+        <Code ref={code} fontSize={30} minWidth={660} maxWidth={660} />
+      </Node>
 
-        <Node ref={videoNode}>
-          <Video ref={videoRef1} src={scrollVideo} opacity={0} radius={5} />
-        </Node>
-      </Rect>,
-    )
-    .add(
-      <Layout
-        direction={"column"}
-        width={1185}
-        height={896}
-        justifyContent={"center"}
-        gap={4}
-        layout
-        x={0}
-        y={0}
-        ref={introRef}
-      >
-        <Txt
-          text={() => "CSS animations".slice(0, introFrame())}
-          fill={color}
-          fontSize={fontSize}
-        />
-        <Code
-          code={() =>
-            "animation-timeline: scroll()".slice(
-              0,
-              introFrame() > 10 ? introFrame() - 10 : 0,
-            )
-          }
-          fill={color}
-          fontSize={fontSize / 1.62}
-        />
-      </Layout>,
-    )
-    .add(
-      <Layout
-        direction={"row"}
-        width={960}
-        gap={4}
-        layout
-        x={1500}
-        y={0}
-        ref={endingTextRef}
-      >
-        <Txt
-          text={() => "fricze.com / demos".slice(0, Math.floor(frame() / 1))}
-          fill={color}
-          fontSize={fontSize}
-        />
-        <Txt
-          text={() => "|"}
-          fill="#00b2ff"
-          fontSize={fontSize}
-          opacity={() => (Math.floor(frame() / 4) % 2 === 1 ? 0 : 1)}
-        />
-      </Layout>,
-    );
+      <Node ref={videoNode}>
+        <Video ref={videoRef1} src={scrollVideo} opacity={0} radius={5} />
+      </Node>
+    </Rect>,
+  );
 
-  yield* waitFor(0.3);
-
-  const seqIntro = Array(40).fill(0);
-  for (const _ of seqIntro) {
-    yield introFrame(introFrame() + 1);
-    yield* waitFor(1 / 60);
-  }
-
-  yield* waitFor(0.3);
-
-  yield* all(introRef().filters.blur(10, 0.6), introRef().opacity(0, 0.6));
   yield code().opacity(0);
   yield code().filters.blur(10);
   yield* code().code.edit(0)`\
@@ -390,23 +302,4 @@ body {
   yield videoRef3().pause();
 
   yield* all(code().filters.blur(10, 0.6), videoRef3().filters.blur(10, 0.6));
-
-  yield spring(SmoothSpring, 1500, -5, 0.2, (value) => {
-    endingTextRef().position.x(value);
-  });
-
-  // const seq_ = Array(6).fill(0);
-  // for (const _ of seq_) {
-  //   yield frameCaret(frameCaret() + 1);
-  //   yield* waitFor(1 / 60);
-  // }
-
-  const seq = Array(60).fill(0);
-  for (const _ of seq) {
-    yield frameCaret(frameCaret() + 1);
-    yield frame(frame() + 1);
-    yield* waitFor(1 / 60);
-  }
-
-  yield* waitFor(1);
 });
