@@ -1,10 +1,18 @@
 import { makeScene2D, Layout, Txt, Code } from "@motion-canvas/2d";
-import { waitFor, createSignal, all, createRef } from "@motion-canvas/core";
+import {
+  waitFor,
+  createSignal,
+  all,
+  createRef,
+  useScene,
+} from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   const introRef = createRef<Layout>();
 
   const introFrame = createSignal(0);
+
+  const subTitle = useScene().variables.get("subTitle", "---");
 
   const color = "#ddd";
   const fontSize = 114;
@@ -28,10 +36,7 @@ export default makeScene2D(function* (view) {
       />
       <Code
         code={() =>
-          "animation-timeline: scroll()".slice(
-            0,
-            introFrame() > 10 ? introFrame() - 10 : 0,
-          )
+          subTitle().slice(0, introFrame() > 10 ? introFrame() - 10 : 0)
         }
         fill={color}
         fontSize={fontSize / 1.62}
