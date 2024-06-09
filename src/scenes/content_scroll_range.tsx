@@ -104,8 +104,7 @@ body {
 @keyframes background-change {${insert(`
     0% {
         background-color: #000;
-    }
-`)}
+    }`)}
 }
 
  `;
@@ -119,34 +118,11 @@ body {
 @keyframes background-change {
     0% {
         background-color: #000;
-    }
-${insert(`
-    50% {
-        background-color: #734c61;
-    }
-`)}
-}
-
- `;
-
-  yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-}
-
-
-@keyframes background-change {
-    0% {
-        background-color: #000;
-    }
-
-    50% {
-        background-color: #734c61;
-    }
-${insert(`
+    }${insert(`
     100% {
         background-color: #fff;
-    }`)}
+    }
+`)}
 }
 
  `;
@@ -162,11 +138,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -186,11 +157,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -230,11 +196,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -258,11 +219,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -277,8 +233,8 @@ body {
     animation-name: background-change;
     animation-timeline: scroll();
     animation-timing-function: linear;
-    animation-range-start: ${replace("0%", "30%")};
-    animation-range-end: 100%;
+    animation-range-start: 0%;
+    animation-range-end: ${replace("100%", "50%")};
 }
 
 
@@ -286,11 +242,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -303,8 +254,8 @@ body {
     animation-name: background-change;
     animation-timeline: scroll();
     animation-timing-function: linear;
-    animation-range-start: 30%;
-    animation-range-end: ${replace("100%", "70%")};
+    animation-range-start: ${replace("0%", "50%")};
+    animation-range-end: ${replace("50%", "100%")};
 }
 
 
@@ -312,11 +263,6 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
-    }
-
     100% {
         background-color: #fff;
     }
@@ -329,8 +275,8 @@ body {
     animation-name: background-change;
     animation-timeline: scroll();
     animation-timing-function: linear;
-    animation-range-start: 30%;
-    animation-range-end: 70%;${insert(`
+    animation-range-start: 50%;
+    animation-range-end: 100%;${insert(`
     animation-fill-mode: both;`)}
 }
 
@@ -339,11 +285,28 @@ body {
     0% {
         background-color: #000;
     }
-
-    50% {
-        background-color: #734c61;
+    100% {
+        background-color: #fff;
     }
+}
 
+`;
+
+  yield* code().code.edit(0.6)`\
+body {
+    animation-name: background-change;
+    animation-timeline: scroll();
+    animation-timing-function: linear;
+    animation-range-start: ${replace("50%", "30%")};
+    animation-range-end: ${replace("100%", "70%")};
+    animation-fill-mode: both;
+}
+
+
+@keyframes background-change {
+    0% {
+        background-color: #000;
+    }
     100% {
         background-color: #fff;
     }
