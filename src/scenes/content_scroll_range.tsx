@@ -17,7 +17,7 @@ import {
   waitUntil,
 } from "@motion-canvas/core";
 
-import scrollVideo from "../../public/scroll2.mp4";
+import scrollVideo from "../../public/timeline_scroll.mp4";
 import scrollVideoViolet from "../../public/scroll_2.mp4";
 import scrollVideoBW from "../../public/scroll_b_w2.mp4";
 

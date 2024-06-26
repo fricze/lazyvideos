@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                scrollbar-width: none;
+            }
+
+            body {
+                background: #f7f7f6;
+                display: flex;
+                flex-direction: column;
+                gap: 4lh;
+                align-items: center;
+                padding: 4lh;
+                animation-name: background-change;
+                animation-timeline: scroll();
+                animation-timing-function: linear;
+            }
+
+            .box {
+                background: #29b9fe;
+                height: 205px;
+                width: 100%;
+                border-radius: 5px;
+            }
+
+            @keyframes background-change {
+                0% {
+                    background: #f7f7f6;
+                }
+                50% {
+                    background: #f9c0b9;
+                }
+                100% {
+                    background: #eb5d57;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+
+        <script>
+            window.scrollTo({
+                top: document.body.getBoundingClientRect().height,
+                left: 0,
+                behavior: "smooth",
+            });
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }, 2000);
+        </script>
+    </body>
+</html>

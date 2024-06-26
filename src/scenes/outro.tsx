@@ -40,19 +40,16 @@ export default makeScene2D(function* (view) {
     </Layout>,
   );
 
-  const width = endingTextRef().width;
-  console.log("width");
-  console.log(width());
   yield spring(SmoothSpring, 1500, -18, 0.2, (value) => {
     endingTextRef().position.x(value);
   });
 
-  const seq = Array(60).fill(0);
+  const seq = Array(30).fill(0);
   for (const _ of seq) {
     yield frameCaret(frameCaret() + 1);
     yield frame(frame() + 1);
-    yield* waitFor(1 / 60);
+    yield* waitFor(1 / 30);
   }
 
-  yield* waitFor(1);
+  yield* waitFor(0.1);
 });
