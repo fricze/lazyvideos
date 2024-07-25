@@ -27,7 +27,7 @@ export default makeScene2D(function* (view) {
       ref={endingTextRef}
     >
       <Txt
-        text={() => "fricze.com / demos".slice(0, Math.floor(frame() / 1))}
+        text={() => "youtube.com/@fricze".slice(0, Math.floor(frame() / 1))}
         fill={color}
         fontSize={fontSize}
       />
@@ -40,7 +40,7 @@ export default makeScene2D(function* (view) {
     </Layout>,
   );
 
-  yield spring(SmoothSpring, 1500, -18, 0.2, (value) => {
+  yield spring(SmoothSpring, 1500, -70, 0.2, (value) => {
     endingTextRef().position.x(value);
   });
 
@@ -48,7 +48,7 @@ export default makeScene2D(function* (view) {
   for (const _ of seq) {
     yield frameCaret(frameCaret() + 1);
     yield frame(frame() + 1);
-    yield* waitFor(1 / 30);
+    yield* waitFor(1 / 15);
   }
 
   yield* waitFor(0.1);
