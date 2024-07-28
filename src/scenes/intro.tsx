@@ -46,7 +46,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.3);
 
-  const seqIntro = Array(40).fill(0);
+  const seqIntro = Array(45).fill(0);
   for (const _ of seqIntro) {
     yield introFrame(introFrame() + 1);
     yield* waitFor(1 / 60);

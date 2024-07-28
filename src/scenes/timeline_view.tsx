@@ -10,8 +10,8 @@ import {
 } from "@motion-canvas/2d";
 import { waitFor, all, createRef, DEFAULT } from "@motion-canvas/core";
 
-import scroll_video_001 from "/timeline_scroll.mp4";
-import scroll_video_002 from "/timeline_scroll_002.mp4";
+import scroll_video_001 from "/timeline_view_001.mp4";
+import scroll_video_002 from "/timeline_view_002.mp4";
 
 export default makeScene2D(function* (view) {
   const code = createRef<Code>();
@@ -58,7 +58,7 @@ export default makeScene2D(function* (view) {
   yield code().opacity(0);
   yield code().filters.blur(10);
   yield* code().code.edit(0)`\
-body {
+.box {
 
 }
 
@@ -66,15 +66,15 @@ body {
   yield* all(code().filters.blur(0, 0.6), code().opacity(1, 0.6));
 
   yield* code().code.edit(0.6)`\
-body {
-${insert("    animation-name: background-change;")}
+.box {
+${insert("    animation-name: appear;")}
 }
 
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
+.box {
+    animation-name: appear;
 }
 ${insert(`
 
@@ -85,29 +85,29 @@ ${insert(`
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
+.box {
+    animation-name: appear;
 }
 
 
-@keyframes${insert(" background-change")} {
+@keyframes${insert(" appear")} {
 
 }
 
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
+.box {
+    animation-name: appear;
 }
 
 
-@keyframes background-change {${replace(
+@keyframes appear {${replace(
     `
   `,
     `
     from {
-        background: #f7f7f6;
+        background-color: #29b9fe;
     }`,
   )}
 }
@@ -115,14 +115,14 @@ body {
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
+.box {
+    animation-name: appear;
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     from {
-        background: #f7f7f6;
+        background-color: #29b9fe;
     }${insert(`
 
     to {
@@ -136,15 +136,15 @@ body {
   yield* waitFor(1);
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;${insert(`
-    animation-timeline: scroll();`)}
+.box {
+    animation-name: appear;${insert(`
+    animation-timeline: view();`)}
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     from {
-        background: #f7f7f6;
+        background-color: #29b9fe;
     }
 
     to {
@@ -155,16 +155,16 @@ body {
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-    animation-timeline: scroll();${insert(`
+.box {
+    animation-name: appear;
+    animation-timeline: view();${insert(`
     animation-timing-function: linear;`)}
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     from {
-        background: #f7f7f6;
+        background-color: #29b9fe;
     }
 
     to {
@@ -181,22 +181,24 @@ body {
 
   yield videoRef1().play();
   yield* waitFor(4);
-  yield videoRef1().pause();
-  yield* videoRef1().opacity(0.5, 0.6);
+  // opacity
 
-  yield* code().selection(lines(7, 20), 0.6);
+  yield videoRef1().pause();
+  yield videoRef1().opacity(0.5, 0.6);
+
+  yield* code().selection(lines(7, 24), 0.6);
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-    animation-timeline: scroll();
+.box {
+    animation-name: appear;
+    animation-timeline: view();
     animation-timing-function: linear;
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     ${replace("from", "0%")} {
-        background: #f7f7f6;
+        background-color: #29b9fe;
     }
 
     ${replace("to", "100%")} {
@@ -207,16 +209,18 @@ body {
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-    animation-timeline: scroll();
+.box {
+    animation-name: appear;
+    animation-timeline: view();
     animation-timing-function: linear;
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     0% {
-        background: #f7f7f6;
+        background-color: #29b9fe;${insert(`
+        filter: blur(20px);
+        scale: 0.5;`)}
     }
 
     100% {
@@ -227,45 +231,53 @@ body {
  `;
 
   yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-    animation-timeline: scroll();
+.box {
+    animation-name: appear;
+    animation-timeline: view();
     animation-timing-function: linear;
 }
 
 
-@keyframes background-change {
+@keyframes appear {
     0% {
-        background: #f7f7f6;
-    }
-
-    ${replace("100%", "50%")} {
-        background-color: #f9c0b9;
-    }
-}
-
- `;
-
-  yield* code().code.edit(0.6)`\
-body {
-    animation-name: background-change;
-    animation-timeline: scroll();
-    animation-timing-function: linear;
-}
-
-
-@keyframes background-change {
-    0% {
-        background: #f7f7f6;
-    }
-
-    50% {
-        background-color: #f9c0b9;
+        background-color: #29b9fe;
+        filter: blur(20px);
+        scale: 0.5;
     }${insert(`
 
-    100% {
-        background: #f7f7f6;
+    50% {
     }`)}
+
+    100% {
+        background-color: #f9c0b9;
+    }
+}
+
+ `;
+
+  yield* code().code.edit(0.6)`\
+.box {
+    animation-name: appear;
+    animation-timeline: view();
+    animation-timing-function: linear;
+}
+
+
+@keyframes appear {
+    0% {
+        background-color: #29b9fe;
+        filter: blur(20px);
+        scale: 0.5;
+    }
+
+    50% {${insert(`
+        filter: blur(0px);
+        scale: 1;`)}
+    }
+
+    100% {
+        background-color: #f9c0b9;
+    }
 }
 
  `;
@@ -274,8 +286,9 @@ body {
 
   yield videoRef1().remove();
   yield videoNode().add(video2Node);
+
   yield* waitFor(1);
-  yield* videoRef2().opacity(1, 0.6);
+  yield videoRef2().opacity(1, 0.6);
   yield videoRef2().play();
   yield* waitFor(3);
 

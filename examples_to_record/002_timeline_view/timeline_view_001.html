@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                scrollbar-width: none;
+            }
+
+            body {
+                background: #f7f7f6;
+                display: flex;
+                flex-direction: column;
+                gap: 4lh;
+                align-items: center;
+                padding: 4lh;
+            }
+
+            .box {
+                animation-name: appear;
+                animation-timeline: view();
+                animation-timing-function: linear;
+                height: 400px;
+                width: 100%;
+                border-radius: 5px;
+            }
+
+            @keyframes appear {
+                from {
+                    background: #29b9fe;
+                }
+                to {
+                    background: #f9c0b9;
+                }
+            }
+
+            p {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 28px;
+                margin-bottom: 2lh;
+            }
+
+            h1 {
+                text-align: left;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 42px;
+                width: 100%;
+            }
+
+            code {
+                font-size: 42px;
+            }
+
+            .box {
+                display: grid;
+                place-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Sed ut perspiciatis</h1>
+        <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt.
+        </p>
+        <h1>Neque porro quisquam est</h1>
+        <p>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+            consectetur, adipisci velit, sed quia non numquam eius modi tempora
+            incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
+            enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+            autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+            voluptas nulla pariatur?
+        </p>
+        <div class="box">
+            <code> scroll-timeline: view(); </code>
+        </div>
+        <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+            sed quia non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem.
+        </p>
+        <p>
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+            autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+            voluptas nulla pariatur?
+        </p>
+
+        <script>
+            window.scrollTo({
+                top: document.body.getBoundingClientRect().height,
+                left: 0,
+                behavior: "smooth",
+            });
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }, 2000);
+        </script>
+    </body>
+</html>
