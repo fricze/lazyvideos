@@ -12,10 +12,16 @@ export default makeScene2D(function* (view) {
 
   const introFrame = createSignal(0);
 
-  const subTitle = useScene().variables.get("subTitle", "---");
+  const subTitle = useScene().variables.get("subTitle", "");
+  const subTitle2 = useScene().variables.get("subTitle2", "");
 
   const color = "#ddd";
   const fontSize = 114;
+
+  const length1 = subTitle().length;
+  const length2 = subTitle2().length;
+
+  const mainLength = 10;
 
   view.fill("#242424").add(
     <Layout
@@ -36,7 +42,22 @@ export default makeScene2D(function* (view) {
       />
       <Code
         code={() =>
-          subTitle().slice(0, introFrame() > 10 ? introFrame() - 10 : 0)
+          subTitle().slice(
+            0,
+            introFrame() > mainLength ? introFrame() - mainLength : 0,
+          )
+        }
+        fill={color}
+        fontSize={fontSize / 1.62}
+      />
+      <Code
+        code={() =>
+          subTitle2().slice(
+            0,
+            introFrame() > mainLength + length1
+              ? introFrame() - (mainLength + length1)
+              : 0,
+          )
         }
         fill={color}
         fontSize={fontSize / 1.62}
@@ -46,7 +67,8 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.3);
 
-  const seqIntro = Array(45).fill(0);
+  const length = length1 + length2 + mainLength;
+  const seqIntro = Array(length).fill(0);
   for (const _ of seqIntro) {
     yield introFrame(introFrame() + 1);
     yield* waitFor(1 / 60);

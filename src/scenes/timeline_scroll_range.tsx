@@ -187,7 +187,7 @@ header {
 `;
 
   // WAIT
-  yield* waitFor(1);
+  // yield* waitFor(1);
 
   yield* videoRef1().opacity(1, 0.6);
 
@@ -286,6 +286,9 @@ header h1 {
 }
 `;
 
+  // wait
+
+  yield* waitFor(1);
   yield* code().selection(lines(20, 26), 0.6);
 
   yield* code().code.edit(0.6)`\
@@ -322,10 +325,12 @@ header h1 {
 
   yield videoRef2().remove();
   yield videoNode().add(video3Node);
-  // yield* waitFor(1);
   yield* videoRef3().opacity(1, 0.6);
   yield videoRef3().play();
-  yield* waitFor(5);
+  yield* waitFor(3);
+
+  yield* codeNode().y(10, 0.6);
+  yield* waitFor(1);
 
   yield* all(
     code().filters.blur(10, 0.6),
